@@ -2,23 +2,16 @@
 import sys
 
 def factorial(n):
-    result = 1
-    while n > 1:
-        result *= n
-        n -= 1  # Il manquait cette décrémentation pour éviter une boucle infinie
-    return result
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
 
 if len(sys.argv) < 2:
-    print("Usage: {} <number>".format(sys.argv[0]))
-    sys.exit(1)
-
-try:
-    n = int(sys.argv[1])
-    if n < 0:
-        print("Error: Factorial is not defined for negative numbers.")
-        sys.exit(1)
-    f = factorial(n)
-    print(f)
-except ValueError:
-    print("Error: Please provide a valid integer.")
-    sys.exit(1)
+    print("Erreur : Tu dois fournir un argument pour calculer le factoriel.")
+else:
+    try:
+        number = int(sys.argv[1])
+        f = factorial(number)
+        print(f"Le factoriel de {number} est {f}.")
+    except ValueError:
+        print("Erreur : L'argument fourni doit être un entier.")
